@@ -7,8 +7,36 @@ var vertical = keyboard_check(vk_down) - keyboard_check(vk_up);
 
 var step = 5;
 
-x += horizontal * step;
-y += vertical * step;
+
+var future_x = x + horizontal * step;
+var future_y = y + vertical * step;
+
+
+if( instance_place(future_x, y, oWall) == noone )
+{
+	x = future_x;
+}
+else
+{
+	while( instance_place(x + sign(horizontal), y, oWall) == noone )
+	{
+		x += sign(horizontal);
+	}
+}
+
+
+if( instance_place(x, future_y, oWall) == noone )
+{
+	y = future_y;
+}
+else
+{
+	while( instance_place(x, y +  sign(vertical), oWall) == noone )
+	{
+		y += sign(vertical);
+	}
+}
+
 
 
 //1 -> derecha
